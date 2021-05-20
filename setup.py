@@ -78,7 +78,7 @@ eula = input("You need to accept the eula to launch your server. Accept it? [y/n
 if eula == "y":
     a_file = open("eula.txt", "r")
     list_of_lines = a_file.readlines()
-    list_of_lines[2] = "eula=true\n"
+    list_of_lines[4] = "eula=true\n"
     a_file = open("eula.txt", "w")
     a_file.writelines(list_of_lines)
     a_file.close()
@@ -88,7 +88,7 @@ elif eula == "n":
 serv_prop_ask = input("Do you wish to change any settings in the system.properties file? [y/n] ")
 while True:
     if serv_prop_ask == "y":
-        serv_prop_ask2 = int(input("\n1. Edit world seed\n2. Edit server description\n3. Edit max player value\n4. Edit view distance\n5. Server port\n6. Exit\n\n"))
+        serv_prop_ask2 = int(input("\n1. Edit world seed\n2. Edit server name\n3. Edit max player value\n4. Edit view distance\n5. Server port\n6. Exit\n\n"))
         if serv_prop_ask2 == 1:
             serv_prop = open("server.properties", "r")
             lines_prop = serv_prop.readlines()
