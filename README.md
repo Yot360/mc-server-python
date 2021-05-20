@@ -6,4 +6,4 @@ Only works on MacOS/Linux
 
 To begin, python3 is required to run my script, install it via https://www.python.org/downloads/ .
 <p>After python3 is installed, clone my repository:</p>
-git clone 
+<code>git clone</code> 
