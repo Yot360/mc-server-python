@@ -12,7 +12,7 @@ paper_url = 'https://papermc.io/api/v1/paper/1.16.5/latest/download'
 vanilla_url = 'https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar'
 
 
-#DOWNLOADS PROGRESS BAR
+# PROGRESS BAR
 pbar = None
 def show_progress(block_num, block_size, total_size):
     global pbar
@@ -78,7 +78,7 @@ eula = input("You need to accept the eula to launch your server. Accept it? [y/n
 if eula == "y":
     a_file = open("eula.txt", "r")
     list_of_lines = a_file.readlines()
-    list_of_lines[4] = "eula=true\n"
+    list_of_lines[3] = "eula=true\n"
     a_file = open("eula.txt", "w")
     a_file.writelines(list_of_lines)
     a_file.close()
