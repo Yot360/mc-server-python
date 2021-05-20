@@ -78,7 +78,7 @@ eula = input("You need to accept the eula to launch your server. Accept it? [y/n
 if eula == "y":
     a_file = open("eula.txt", "r")
     list_of_lines = a_file.readlines()
-    list_of_lines[4] = "eula=true\n"
+    list_of_lines[3] = "eula=true\n"
     a_file = open("eula.txt", "w")
     a_file.writelines(list_of_lines)
     a_file.close()
@@ -86,9 +86,11 @@ if eula == "y":
 elif eula == "n":
     print('Eula refused.\n')
 serv_prop_ask = input("Do you wish to change any settings in the system.properties file? [y/n] ")
+if serv_prop_ask == "n":
+    exit()
 while True:
     if serv_prop_ask == "y":
-        serv_prop_ask2 = int(input("\n1. Edit world seed\n2. Edit server name\n3. Edit max player value\n4. Edit view distance\n5. Server port\n6. Exit\n\n"))
+        serv_prop_ask2 = int(input("\n1. Edit world seed\n2. Edit server name\n3. Edit max player value\n4. Edit view distance\n5. Server port\n6. Enbale/Disbale online mode\n7. Exit\n\n"))
         if serv_prop_ask2 == 1:
             serv_prop = open("server.properties", "r")
             lines_prop = serv_prop.readlines()
@@ -140,8 +142,28 @@ while True:
             serv_prop.writelines(lines_prop)
             serv_prop.close()
             print("\nServer port changed to "+port+".")
+
         elif serv_prop_ask2 == 6:
+            serv_prop = open("server.properties", "r")
+            lines_prop = serv_prop.readlines()
+            
+            online = str(input("\nDo you want to enable online mode? [y/n] "))
+            if online == "y":
+                online_check = "enabled."
+                lines_prop[19] = "online-mode=true\n"
+                serv_prop = open("server.properties", "w")
+                serv_prop.writelines(lines_prop)
+                serv_prop.close()
+            if online == "n":
+                online_check = "enabled."
+                lines_prop[19] = "online-mode=false\n"
+                serv_prop = open("server.properties", "w")
+                serv_prop.writelines(lines_prop)
+                serv_prop.close()   
+            print("Online mode "+online_check)
+        elif serv_prop_ask2 == 7:
             break
+
 start = input("\n Your server is now complete. Do you want to have a start.sh file to start it easily? [y/n] ")
 if start == "y":
     ram = input("\nHow much ram do you want to give to the server? ")
