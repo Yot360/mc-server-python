@@ -1,6 +1,7 @@
 # mc-server-python
 A Minecraft server setup script made using python3!
 Only works on MacOS/Linux
+This script lets you install a minecraft server on your computer very easily, you can customize it, and choose between a Vanilla server or a PaperMC(plugins+optimized). Hope you'll like it!
 
 ## Installation
 
