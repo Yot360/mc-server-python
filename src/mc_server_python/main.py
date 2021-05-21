@@ -38,27 +38,31 @@ def main():
         "Where do you want the server to be installed:\n \n1. In a new folder named server, in home directory \n2. In a custom location"
     )
 
-    server_location = int(input("(e.g 1 or 2) : "))
+    path = None
+    while True:
+        try:
+            server_location = int(input("(e.g 1 or 2) : "))
+        except ValueError:
+            print("Please try again and choose a valid number.")
+            continue
 
-    if server_location == 1:
-        path = home_dir + "/server"
-        if os.path.isdir(path) == True:
-            print("Folder already exists...")
-            exit()
-        elif os.path.isdir(path) == False:
-            print("\nMaking the server in " + path + " .\n")
-            os.mkdir(path)
+        if server_location == 1:
+            path = home_dir + "/server"
+        elif server_location == 2:
+            path = input("\nPlease enter the custom location : ")
 
-    elif server_location == 2:
-        path = input("\nPlease enter the custom location : ")
-        if os.path.isdir(path) == True:
-            print("Folder already exists...")
-            exit()
-        elif os.path.isdir(path) == False:
-            print("\nMaking server in " + path + " .\n")
-            os.mkdir(path)
-    else:
-        print("Please try again and choose a valid number.")
+        if path:
+            if os.path.isdir(path):
+                print("Folder already exists. Try again.")
+                continue
+            break
+        else:
+            print("Please try again and choose a valid number.")
+            continue
+
+    print(f"\nMaking the server in {path}.\n")
+    os.mkdir(path)
+
 
     # MINECRAFT SERVERS JAR DOWNLOADS
     print("Choose which minecraft server type you want to download:\n \n1. Paper \n2. Vanilla")
