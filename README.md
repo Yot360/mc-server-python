@@ -14,7 +14,7 @@ To begin, python3 is required to run my script, install it via https://www.pytho
 
 
 After python3 is installed run `pip install mc-server-python`.
-When pip is done installing the package run `mc_server_python`. Follow the instructions to get up and running!
+When pip is done installing the package run `mc_server_python`. <p>Follow the instructions to get up and running!</p>
 
 
 ## Follow me
