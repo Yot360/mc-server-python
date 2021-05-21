@@ -13,7 +13,7 @@ To begin, python3 is required to run my script, install it via https://www.pytho
 <p>After that, you'll need to download the required python modules with:</p>
 <p><code>pip install -r requirements.txt</code></p>
 <p>Finally, run the script with:</p>
-<p><code>python3 setup.py</code></p>
+<p><code>python3 main.py</code></p>
 <p>Follow the setup and your server will be up and running!</p>
 
 ## Follow me
