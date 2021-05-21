@@ -5,7 +5,7 @@ This script lets you install a minecraft server on your computer very easily, yo
 
 ## Installation
 
-To begin, python3 is required to run my script, install it via https://www.python.org/downloads/ .
+To begin, python3 is required to run my script, install it via https://www.python.org/downloads/ . (Java is also required of course, download it at java.com or with your package manager)
 <p>After python3 is installed, clone my repository:</p>
 <p><code>git clone https://github.com/Yot360/mc-server-python.git</code></p>
 <p>Then cd into the directory with</p>
