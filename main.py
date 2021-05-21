@@ -2,6 +2,8 @@ import urllib.request
 import progressbar
 import os
 import subprocess
+import fileinput
+
 
 print("--------------------")
 print("Made by Yot, @Yot360")
@@ -12,7 +14,7 @@ paper_url = 'https://papermc.io/api/v1/paper/1.16.5/latest/download'
 vanilla_url = 'https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar'
 
 
-# PROGRESS BAR
+#DOWNLOADS PROGRESS BAR
 pbar = None
 def show_progress(block_num, block_size, total_size):
     global pbar
@@ -76,18 +78,13 @@ os.chdir(path)
 os.system('java -jar server.jar')
 eula = input("You need to accept the eula to launch your server. Accept it? [y/n] ")
 if eula == "y":
-    a_file = open("eula.txt", "r")
-    list_of_lines = a_file.readlines()
-    list_of_lines[3] = "eula=true\n"
-    a_file = open("eula.txt", "w")
-    a_file.writelines(list_of_lines)
-    a_file.close()
+    with fileinput.FileInput('eula.txt', inplace=True) as file:
+        for line in file:
+            print(line.replace('eula=false', 'eula=true'), end='')
     print("Eula accepted.\n")
 elif eula == "n":
     print('Eula refused.\n')
 serv_prop_ask = input("Do you wish to change any settings in the system.properties file? [y/n] ")
-if serv_prop_ask == "n":
-    exit()
 while True:
     if serv_prop_ask == "y":
         serv_prop_ask2 = int(input("\n1. Edit world seed\n2. Edit server name\n3. Edit max player value\n4. Edit view distance\n5. Server port\n6. Enbale/Disbale online mode\n7. Exit\n\n"))
@@ -163,14 +160,26 @@ while True:
             print("Online mode "+online_check)
         elif serv_prop_ask2 == 7:
             break
+    if serv_prop_ask == "n":
+        break
 
 start = input("\n Your server is now complete. Do you want to have a start.sh file to start it easily? [y/n] ")
 if start == "y":
-    ram = input("\nHow much ram do you want to give to the server? ")
-    start_sh = open("start.sh", "x")
-    start_sh.writelines('#!/bin/bash\njava -Xmx'+ram+'M -Xms'+ram+'M -jar server.jar nogui')
-    start_sh.close()
+    start_type = int(input("\nDo you want :\n1. An optimized start file so your server will run better\n2. A normal start file\n"))
+    if start_type == 1:
+        ram = input("\nHow much ram do you want to give to the server? ")
+        start_sh = open("start.sh", "x")
+        start_sh.writelines('#!/bin/bash\njava -Xmx'+ram+'M -Xms'+ram+'M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar server.jar nogui')
+        start_sh.close()
+    if start_type == 2:
+        ram = input("\nHow much ram do you want to give to the server? ")
+        start_sh = open("start.sh", "x")
+        start_sh.writelines('#!/bin/bash\njava -Xmx'+ram+'M -Xms'+ram+'M -jar server.jar nogui')
+        start_sh.close()
     os.chmod('start.sh', 0o777)
+
+if start == "n":
+    print
 
 start_rn = input("\nDo you to start your server right now? [y/n] ")
 if start_rn == "y":
