@@ -155,7 +155,7 @@ while True:
                 serv_prop.writelines(lines_prop)
                 serv_prop.close()
             if online == "n":
-                online_check = "enabled."
+                online_check = "disabled."
                 lines_prop[19] = "online-mode=false\n"
                 serv_prop = open("server.properties", "w")
                 serv_prop.writelines(lines_prop)
