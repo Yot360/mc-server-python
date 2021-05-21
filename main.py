@@ -1,7 +1,6 @@
 import urllib.request
 import progressbar
 import os
-import subprocess
 import fileinput
 
 
