@@ -1,4 +1,4 @@
-from mc_server_python.main import main
+from mc_server_setup.main import main
 
 
 def cli():
