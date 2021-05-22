@@ -3,7 +3,9 @@
     <img src="https://img.shields.io/pypi/v/mc-server-setup?" alt="Package version">
   </a>
   <img src="https://img.shields.io/github/license/Yot360/mc-server-python" alt="MIT">
-  <img alt="Twitter URL" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fyot360">
+  <a href="https://twitter.com/yot360" target="_blank">
+    <img alt="Twitter URL" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fyot360">
+  </a>
 </p>
 
 # mc-server-python
