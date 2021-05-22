@@ -1,3 +1,11 @@
+<p align="center">
+  <a href="https://pypi.org/project/mc-server-setup" target="_blank">
+    <img src="https://img.shields.io/pypi/v/mc-server-setup?" alt="Package version">
+  </a>
+  <img src="https://img.shields.io/github/license/Yot360/mc-server-python" alt="MIT">
+  <img alt="Twitter URL" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fyot360">
+</p>
+
 # mc-server-python
 A Minecraft server setup script made using python3!
 
