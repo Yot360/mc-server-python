@@ -2,7 +2,6 @@ import fileinput
 import os
 import progressbar
 import urllib.request
-import subprocess
 
 
 print("--------------------")
@@ -16,7 +15,6 @@ vanilla_url = 'https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7
 # SETUP PROGRESS BAR
 pbar = None
 
-
 def show_progress(block_num, block_size, total_size):
     global pbar
     if pbar is None:
@@ -29,7 +27,6 @@ def show_progress(block_num, block_size, total_size):
     else:
         pbar.finish()
         pbar = None
-
 
 def main():
     # SERVER LOCATION
@@ -62,7 +59,6 @@ def main():
 
     print(f"\nMaking the server in {path}.\n")
     os.mkdir(path)
-
 
     # MINECRAFT SERVERS JAR DOWNLOADS
     print("Choose which minecraft server type you want to download:\n \n1. Paper \n2. Vanilla")
@@ -175,38 +171,41 @@ def main():
             break
 
     start = input("\n Your server is now complete. Do you want to have a start file to start it easily? [y/n] ")
+    if start == "n":
+        pass
     if start == "y":
         os_detect = input("\n Will you run the server on Windows? [y/n] ")
-    if os_detect == "y":
-        start_type = int(input("\nDo you want :\n1. An optimized start file so your server will run better\n2. A normal start file\n"))
-        if start_type == 1:
-            ram = input("\nHow much ram do you want to give to the server? ")
-            start_bat = open("start.bat", "x")
-            start_bat.writelines('java -Xmx'+ram+'M -Xms'+ram+'M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar server.jar nogui\nPAUSE')
-            start_bat.close()
-        if start_type == 2:
-            ram = input("\nHow much ram do you want to give to the server? ")
-            start_bat = open("start.bat", "x")
-            start_bat.writelines('java -Xmx'+ram+'M -Xms'+ram+'M -jar server.jar nogui\nPAUSE')
-            start_bat.close()
-    if os_detect == "n":
-        start_type = int(input("\nDo you want :\n1. An optimized start file so your server will run better\n2. A normal start file\n"))
-        if start_type == 1:
-            ram = input("\nHow much ram do you want to give to the server? ")
-            start_sh = open("start.sh", "x")
-            start_sh.writelines('#!/bin/bash\njava -Xmx'+ram+'M -Xms'+ram+'M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar server.jar nogui')
-            start_sh.close()
-        if start_type == 2:
-            ram = input("\nHow much ram do you want to give to the server? ")
-            start_sh = open("start.sh", "x")
-            start_sh.writelines('#!/bin/bash\njava -Xmx'+ram+'M -Xms'+ram+'M -jar server.jar nogui')
-            start_sh.close()
-        os.chmod('start.sh', 0o777)
-
-    if start == "n":
-        print
+        if os_detect == "y":
+            start_type = int(input("\nDo you want :\n1. An optimized start file so your server will run better\n2. A normal start file\n"))
+            if start_type == 1:
+                ram = input("\nHow much ram do you want to give to the server? ")
+                start_bat = open("start.bat", "x")
+                start_bat.writelines('java -Xmx'+ram+'M -Xms'+ram+'M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar server.jar nogui\nPAUSE')
+                start_bat.close()
+            if start_type == 2:
+                ram = input("\nHow much ram do you want to give to the server? ")
+                start_bat = open("start.bat", "x")
+                start_bat.writelines('java -Xmx'+ram+'M -Xms'+ram+'M -jar server.jar nogui\nPAUSE')
+                start_bat.close()
+        if os_detect == "n":
+            start_type = int(input("\nDo you want :\n1. An optimized start file so your server will run better\n2. A normal start file\n"))
+            if start_type == 1:
+                ram = input("\nHow much ram do you want to give to the server? ")
+                start_sh = open("start.sh", "x")
+                start_sh.writelines('#!/bin/bash\njava -Xmx'+ram+'M -Xms'+ram+'M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar server.jar nogui')
+                start_sh.close()
+            if start_type == 2:
+                ram = input("\nHow much ram do you want to give to the server? ")
+                start_sh = open("start.sh", "x")
+                start_sh.writelines('#!/bin/bash\njava -Xmx'+ram+'M -Xms'+ram+'M -jar server.jar nogui')
+                start_sh.close()
+            os.chmod('start.sh', 0o777)
 
     start_rn = input("\nDo you to start your server right now? [y/n] ")
+    if start_rn == "n":
+        print("Ok, if you want to launch your server simply run the start.sh(.bat) file!")
+        print("Have fun!")
+        exit()
     if os_detect == "y":
         if start_rn == "y":
             print("\nServer starting...")
@@ -215,8 +214,5 @@ def main():
         if start_rn == "y":
             print("\nServer starting...")
             os.system('./start.sh')
-    if start_rn == "n":
-        print("Ok, if you want to launch your server simply run the start.sh(.bat) file!")
-        print("Have fun!")
 
 main()
