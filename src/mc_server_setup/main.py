@@ -2,6 +2,7 @@ import fileinput
 import os
 import progressbar
 import urllib.request
+from pyngrok import ngrok
 
 
 print("--------------------")
@@ -201,6 +202,24 @@ def main():
                 start_sh.close()
             os.chmod('start.sh', 0o777)
 
+    ngrok_ask = input("\nDo you want to start ngrok/minecraft server (access server without opening ports)? [y/n] ")
+    if ngrok_ask == "y":
+        while True:
+            auth = str(input("Please crate an account at https://dashboard.ngrok.com/signup, and enter your AUTH Token: "))
+            ngrok.set_auth_token(auth)
+            break
+        # <NgrokTunnel: "tcp://0.tcp.ngrok.io:25565" -> "localhost:225565">
+        ssh_tunnel = ngrok.connect(25565, "tcp")
+        tunnels = ngrok.get_tunnels()
+        print("\n\033[1;32;40mNgrok started, you can now access the server with"+str(tunnels))
+        if os_detect == "y":
+            print("\nServer starting...")
+            os.system(path+'/start.bat')
+        if os_detect == "n":
+                print("\nServer starting...")
+                os.system('./start.sh')
+    if ngrok_ask == "n":
+        pass
     start_rn = input("\nDo you to start your server right now? [y/n] ")
     if start_rn == "n":
         print("Ok, if you want to launch your server simply run the start.sh(.bat) file!")
