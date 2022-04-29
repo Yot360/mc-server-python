@@ -10,8 +10,8 @@ print("Made by Yot, @Yot360")
 print("--------------------\n")
 
 # URLS FOR SERVER FILES
-paper_url = 'https://papermc.io/api/v1/paper/1.16.5/latest/download'
-vanilla_url = 'https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar'
+paper_url = 'https://papermc.io/api/v2/projects/paper/versions/1.17.1/builds/388/downloads/paper-1.17.1-388.jar'
+vanilla_url = 'https://launcher.mojang.com/v1/objects/c8f83c5655308435b3dcf03c06d9fe8740a77469/server.jar'
 
 # SETUP PROGRESS BAR
 pbar = None
