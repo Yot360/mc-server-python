@@ -33,4 +33,4 @@ When pip is done installing the package run `mc_server_setup`. <p>Follow the ins
 **My twitter:** @Yot360
 
 
-**My website(work in progress):** https://yot-dev.ml
+**My website(work in progress):** https://yot-dev.com
